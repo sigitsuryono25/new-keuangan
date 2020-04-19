@@ -17,9 +17,9 @@ class Anggaran extends CI_Controller {
     public function __construct() {
         parent::__construct();
         if (!$this->session->has_userdata('perusahaan')) {
-//            echo "<script>alert('Anda Belum memilih klien. Silahkan piilih terlebih dahulu'); "
-//            . "location.assign('" . site_url('home') . "');"
-//            . "</script>";
+            echo "<script>alert('Anda Belum memilih klien. Silahkan piilih terlebih dahulu'); "
+            . "location.assign('" . site_url('home') . "');"
+            . "</script>";
         }
     }
 
@@ -34,15 +34,25 @@ class Anggaran extends CI_Controller {
         $this->session->set_userdata($sessionData);
         redirect('anggaran');
     }
+    
+    function end_session_anggaran() {
+        $this->session->unset_userdata('perusahaan');
+        $this->session->unset_userdata('id_perusahaan');
+        redirect('home');
+    }
 
     function index() {
         $data['title'] = "Anggaran | Keuangan";
         $data['metadescriptions'] = "Dashboard Anggaran";
         $data['page_title'] = "Dashboard Anggaran";
         $data['client'] = $this->client->getClientByIdPerusahaan($this->session->userdata('id_perusahaan'))->result();
+        $data['kategori'] = $this->kategori->getKategori()->result();   
+        $data['pos'] = $this->pos->getPos()->result(); 
+        $data['klien'] = $this->client->getClientByIdPerusahaan($this->session->userdata('id_perusahaan'));
         $this->load->view('headfoot/header', $data);
         $this->load->view('anggaran/home/dashboard');
         $this->load->view('headfoot/footer');
     }
+    
 
 }

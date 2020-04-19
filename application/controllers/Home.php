@@ -17,6 +17,9 @@ class Home extends CI_Controller{
     public function __construct() {
         parent::__construct();
         //check session here
+        if(!$this->session->has_userdata('username')){
+            redirect('welcome');
+        }
     }
     
     function index() {

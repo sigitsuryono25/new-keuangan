@@ -135,5 +135,8 @@ $autoload['language'] = array();
 $autoload['model'] = array(
     'Client_m' => 'client',
     'Crud_m' => 'crud',
-    'Etc' => 'etc'
+    'Etc' => 'etc',
+    'Kategori_m' => 'kategori',
+    'Pos_m' => 'pos',
+    'Peran_m' => 'peran',
 );

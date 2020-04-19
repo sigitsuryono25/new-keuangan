@@ -78,7 +78,7 @@ class Client extends CI_Controller {
         ];
 
         if ($this->crud->insertData('tbl_klien', $dataKlien) > 0) {
-            redirect('client/daftar_klien');
+            echo '0';
         } else {
             echo "somenthing wrong, please try again.";
         }
@@ -124,11 +124,11 @@ class Client extends CI_Controller {
     }
 
     function edit_klien_proc() {
-        $namaKlien = $this->input->post('nama-klien');
-        $teleponKlien = $this->input->post('telepon-klien');
-        $emailKlien = $this->input->post('email-klien');
-        $idPerusahaan = $this->input->post('id-perusahaan');
-        $idKlien = $this->input->post('id-klien');
+        $namaKlien = $this->input->post_get('nama-klien');
+        $teleponKlien = $this->input->post_get('telepon-klien');
+        $emailKlien = $this->input->post_get('email-klien');
+        $idPerusahaan = $this->input->post_get('id-perusahaan');
+        $idKlien = $this->input->post_get('id-klien');
 
         $dataKlien = [
             'nama_klien' => $namaKlien,
@@ -139,9 +139,9 @@ class Client extends CI_Controller {
         $where = ['id_klien' => $idKlien];
 
         if ($this->crud->updateData('tbl_klien', $dataKlien, $where) > 0) {
-            redirect('client/daftar_klien');
+            echo '0';
         } else {
-            echo "somenthing wrong, please try again.";
+            echo "1";
         }
     }
 
@@ -155,9 +155,10 @@ class Client extends CI_Controller {
     }
 
     function delete_klien($idKlien) {
+        $idKlien = $this->input->get('id-klien');
         $where = ['id_klien' => $idKlien];
         if ($this->crud->deleteData('tbl_klien', $where) > 0) {
-            redirect('client/daftar_klien');
+            redirect('anggaran');
         } else {
             echo "somenthing wrong, please try again.";
         }

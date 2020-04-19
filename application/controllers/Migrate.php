@@ -24,7 +24,7 @@ class Migrate extends CI_Controller {
     //put your code here
     public function index() {
 
-        $version = 9;
+        $version = 10;
         $this->load->library('migration');
 
         for ($i = 1; $i <= $version; $i++) {
