@@ -12,6 +12,18 @@
  * @author sigit
  */
 class Migrate extends CI_Controller {
+    
+    function default_value_db() {
+        $data = [
+            'username' => 'admin',
+            'nama_user' => 'Administrator',
+            'password' => md5('admin'),
+            'created_at' => 'current_timestamp()',
+            'updated_at' => 'current_timestamp()'
+        ];
+        
+        $this->db->insert('tbl_admin', $data);
+    }
 
     function create_db() {
         $this->load->dbforge();
