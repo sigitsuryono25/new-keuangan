@@ -35,7 +35,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="<?php echo site_url('welcome/logout')?>">Logout</a>
+                <a class="btn btn-primary" href="<?php echo site_url('welcome/logout') ?>">Logout</a>
             </div>
         </div>
     </div>
@@ -51,9 +51,16 @@
 
 <!-- Custom scripts for all pages-->
 <script src="<?php echo base_url('assets/') ?>vendor/chart.js/Chart.min.js"></script>
+<script src="<?php echo base_url('assets/') ?>vendor/jquery-mask-money/jquery.maskMoney.js"></script>
 <script src="<?php echo base_url('assets/') ?>js/sb-admin-2.min.js"></script>
 <script src="<?php echo base_url('assets/') ?>js/demo/datatables-demo.js"></script>
 <script src="<?php echo base_url('assets/') ?>js/demo/chart-area-demo.js"></script>
+
+<script>
+    $(function () {
+        $('.currency').maskMoney({thousands: '.', precision: '0'});
+    })
+</script>
 </body>
 
 </html>

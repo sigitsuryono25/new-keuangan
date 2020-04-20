@@ -33,4 +33,9 @@ class Etc extends CI_Model {
         );
     }
 
+    public function rps($angka) {
+        $rupiah = number_format($angka, 0, ',', '.');
+        return $rupiah;
+    }
+
 }

@@ -16,7 +16,7 @@ class Pos_m extends CI_Model {
     //put your code here
 
     function getPos() {
-        return $this->db->query("SELECT * FROM tbl_pos");
+        return $this->db->query("SELECT * FROM tbl_pos INNER JOIN tbl_kategori ON tbl_pos.id_kategori=tbl_kategori.id_kategori GROUP BY id_pos");
     }
 
     function getPosById($idPos) {
