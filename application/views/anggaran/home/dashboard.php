@@ -1,7 +1,12 @@
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-md-6">
-            <h1 class="h3 mb-4 text-gray-800"><?php echo $page_title ?></h1>
+            <h1 class="h3 text-gray-800"><?php echo $page_title ?></h1>
+            <h5 class="text-gray-800"><?php
+                echo (!empty($this->session->userdata('final_anggaran'))) ? "Pendapatan setelah barang dan pajak: " .
+                        $this->etc->rps($this->session->userdata('final_anggaran')) : ""
+                ?>
+            </h5>
         </div>
         <div class="col-md-6 text-right">
             <h5 class="text-primary"><i class="fas fa-industry"></i> 
@@ -72,7 +77,7 @@
     <?php if (!empty($this->session->userdata('nama_project'))) { ?>
 
         <div class="row">
-            <div class="col-md-3 col-lg-3 mb-4">
+            <div class="col-md-4 col-lg-4 mb-4">
                 <div id="accordion-anggaran" title="Tambah, Edit dan Lihat Summary, Lihat Detail Anggaran">
                     <div class="card">
                         <div class="card-header bg-primary shadow-sm d-flex justify-content-between" id="anggaran">
@@ -86,21 +91,23 @@
                         <div id="anggaranCollapse" class="collapse show" aria-labelledby="anggaran" data-parent="#accordion-anggaran">
                             <div class="card-body p-0">
                                 <ul class="list-group border-0">
-                                    <li class="list-group-item d-flex justify-content-between  border-0">
+                                    <a href="javascript:void(0)" onclick="mode = 'add'" data-target="#form-add-anggaran" data-toggle="modal"
+                                       class="text-decoration-none list-group-item d-flex justify-content-between  border-0">
                                         <i class="fas fa-plus mt-1"></i>
                                         Tambah Anggaran
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between  border-0">
+                                    </a>
+                                    <a href="javascript:void(0)" data-target="#modal-anggaran" data-toggle="modal"
+                                       class="list-group-item d-flex justify-content-between  border-0">
                                         <i class="fas fa-paperclip mt-1"></i>
                                         Summary Anggaran
-                                    </li>
+                                    </a>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-lg-3 mb-4">
+            <div class="col-md-4 col-lg-4 mb-4">
                 <div id="accordion-kategori">
                     <div class="card">
                         <div class="card-header bg-success shadow-sm d-flex justify-content-between" id="kategori"  title="Tambah, Edit dan Lihat Kategori">
@@ -130,7 +137,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-lg-3 mb-4">
+            <div class="col-md-4 col-lg-4 mb-4">
                 <div id="accordion-pos">
                     <div class="card">
                         <div class="card-header bg-warning shadow-sm d-flex justify-content-between" id="pos"  title="Tambah, Edit dan Lihat Pos">
@@ -221,6 +228,8 @@
     <?php $this->load->view('anggaran/kategori/modal-form-kategori') ?>
     <?php $this->load->view('anggaran/pos/modal-pos') ?>
     <?php $this->load->view('anggaran/pos/modal-form-pos') ?>
+    <?php $this->load->view('anggaran/anggaran/modal-anggaran') ?>
+    <?php $this->load->view('anggaran/anggaran/modal-form-anggaran') ?>
 <?php } ?>
 <?php $this->load->view('anggaran/client/modal-klien') ?>
 <?php $this->load->view('anggaran/client/modal-form-klien') ?>

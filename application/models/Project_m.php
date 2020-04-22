@@ -19,7 +19,7 @@ class Project_m extends CI_Model {
     }
 
     function getProjectById($idProject) {
-        return $this->db->query("SELECT * FROM tbl_project "
+        return $this->db->query("SELECT *,(anggaran-pph-ppn) as final_anggaran FROM tbl_project "
                         . "INNER JOIN tbl_klien "
                         . "ON tbl_project.id_klien=tbl_klien.id_klien "
                         . "INNER JOIN tbl_perusahaan "
@@ -29,13 +29,18 @@ class Project_m extends CI_Model {
 
     function getProjectByIdKlien() {
         $idPerusahaan = $this->session->userdata('id_perusahaan');
-        return $this->db->query("SELECT * FROM tbl_project "
+        return $this->db->query("SELECT *,(anggaran-pph-ppn) as final_anggaran FROM tbl_project "
                         . "INNER JOIN tbl_klien "
                         . "ON tbl_project.id_klien=tbl_klien.id_klien "
                         . "INNER JOIN tbl_perusahaan "
                         . "ON tbl_klien.asal_perusahaan=tbl_perusahaan.id_perusahaan "
                         . "WHERE tbl_klien.asal_perusahaan "
                         . "IN ('$idPerusahaan')");
+    }
+
+    function getDetailProjectByTahun() {
+        $idProject = $this->session->userdata('id_project');
+        return $this->db->query("SELECT * FROM tbl_project WHERE id_project IN ('$idProject')");
     }
 
 }

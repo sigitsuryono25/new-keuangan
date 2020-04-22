@@ -139,5 +139,7 @@ $autoload['model'] = array(
     'Kategori_m' => 'kategori',
     'Pos_m' => 'pos',
     'Peran_m' => 'peran',
-    'Project_m' => 'project'
+    'Project_m' => 'project',
+    'Bulan_m' => 'bulan',
+    'Anggaran_m' => 'anggaran'
 );

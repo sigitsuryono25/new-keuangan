@@ -12,7 +12,7 @@
  * @author sigit
  */
 class Migrate extends CI_Controller {
-    
+
     function default_value_db() {
         $data = [
             'username' => 'admin',
@@ -21,8 +21,28 @@ class Migrate extends CI_Controller {
             'created_at' => 'current_timestamp()',
             'updated_at' => 'current_timestamp()'
         ];
-        
+
         $this->db->insert('tbl_admin', $data);
+        $this->db->query("INSERT INTO `tbl_kategori` (`id_kategori`, `nama_kategori`) VALUES
+                        (1, 'Administrasi'),
+                        (2, 'Produksi & Operasion'),
+                        (3, 'Peralatan & Infrastr'),
+                        (4, 'Perawatan / Garansi');"
+        );
+        $this->db->query("INSERT INTO `tbl_bulan` (`id_bulan`, `nama_bulan`) VALUES
+                        (1, 'Januari'),
+                        (2, 'Februari'),
+                        (3, 'Maret'),
+                        (4, 'April'),
+                        (5, 'Mei'),
+                        (6, 'Juni'),
+                        (7, 'Juli'),
+                        (8, 'Agustus'),
+                        (9, 'September'),
+                        (10, 'Oktober'),
+                        (11, 'November'),
+                        (12, 'Desember');"
+        );
     }
 
     function create_db() {

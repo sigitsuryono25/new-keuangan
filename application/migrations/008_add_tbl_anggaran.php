@@ -14,6 +14,10 @@ class Migration_Add_tbl_anggaran extends CI_Migration {
                 'type' => 'VARCHAR',
                 'constraint' => '100',
             ),
+            'id_project' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '100',
+            ),
             'id_bulan' => array(
                 'type' => 'INT',
             ),

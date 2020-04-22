@@ -19,11 +19,16 @@ class Project extends CI_Controller {
         $namaProject = $this->input->post('nama-project', true);
         $anggaran = $this->input->post('anggaran', true);
         $idKlien = $this->input->post('id-klien', true);
+        $cleanAnggaran = str_replace(".", "", $anggaran);
+        $ppn = $cleanAnggaran / 11;
+        $pph = $cleanAnggaran * 10 * 0.02;
 
         $data = [
             'id_project' => $this->generateIdProject(),
             'nama_project' => $namaProject,
-            'anggaran' => str_replace(".", "", $anggaran),
+            'anggaran' => $cleanAnggaran,
+            'pph' => $pph,
+            'ppn' => $ppn,
             'id_klien' => $idKlien
         ];
 
@@ -48,11 +53,17 @@ class Project extends CI_Controller {
         $namaProject = $this->input->post('nama-project', true);
         $anggaran = $this->input->post('anggaran', true);
         $idKlien = $this->input->post('id-klien', true);
+        $cleanAnggaran = str_replace(".", "", $anggaran);
+        $ppn = $cleanAnggaran / 11;
+        $pph = $cleanAnggaran * 10 * 0.02;
+
 
         $data = [
             'nama_project' => $namaProject,
-            'anggaran' => str_replace(".", "", $anggaran),
-            'id_klien' => $idKlien
+            'anggaran' => $cleanAnggaran,
+            'id_klien' => $idKlien,
+            'pph' => $pph,
+            'ppn' => $ppn,
         ];
 
         $where = [
@@ -81,13 +92,16 @@ class Project extends CI_Controller {
         redirect('anggaran');
     }
 
-    private function generateIdProject($length = 10) {
+    function generateIdProject($length = 4) {
         $prefix = "PRJCT-";
         $lastId = $this->project->getLastIdProject();
         if ($lastId->num_rows() > 0) {
-            
+            $id = $lastId->row()->id_project;
+            $explode = explode('-', $id);
+            $nextid = $explode[1] + 1;
+            echo $prefix . str_pad($nextid, $length, "0", 0);
         } else {
-            return str_pad($prefix, $length, "0") . "1";
+            echo $prefix . str_pad('1', $length, "0", 0);
         }
     }
 

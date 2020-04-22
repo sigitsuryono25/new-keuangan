@@ -17,6 +17,12 @@ class Migration_Add_tbl_project extends CI_Migration {
             'anggaran' => array(
                 'type' => 'int',
             ),
+            'pph' => array(
+                'type' => 'int',
+            ),
+            'ppn' => array(
+                'type' => 'int',
+            ),
             'id_klien' => array(
                 'type' => 'varchar',
                 'constraint' => '100',
