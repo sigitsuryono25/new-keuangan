@@ -38,11 +38,6 @@
                         <td><?php echo $p->email ?></td>
                         <td><?php echo $p->nomor_telepon ?></td>
                         <td>
-                            <a href="javascript:void(0)" 
-                               data-target="#tambah-client" 
-                               data-toggle="modal" 
-                               onclick="return document.getElementById('id-perusahaan').value = `<?php echo $p->id_perusahaan ?>`"
-                               class="btn btn-block btn-success text-white">Tambah Klien</a>
                             <a href="<?php echo site_url('client/form_edit_perusahaan/' . $p->id_perusahaan) ?>" class="btn btn-block btn-warning text-dark">Edit</a>
                             <a href="<?php echo site_url('client/delete_perusahaan/' . $p->id_perusahaan) ?>" onclick="return confirm('Hapus Data ini?')" class="btn btn-block btn-danger text-white">Hapus</a>
                         </td>

@@ -39,6 +39,7 @@
             <div class="row my-4 print-container">
                 <div class="col-md-12 text-right">
                     <button class="btn btn-outline-info" onclick="window.print()"><i class="fa fa-print"></i>&nbsp; Cetak</button>
+                    <a class="btn btn-outline-dark" href="<?php echo site_url('Detailanggaran/detail_semua_bulan?tahun='. $this->input->get('tahun'))?>" target="_blank"><i class="fa fa-print"></i>&nbsp; Cetail Detai Anggaran</a>
                 </div>
             </div>
             <div class="table-responsive">
@@ -171,7 +172,7 @@
 
                         <tr style="background-color: #FFFF00">
                             <td><span class="font-weight-bold">Perkiraan Rugi Laba</span></td>
-                            <td><?php echo floor(($total / $akhir) * 100) ?> %</td>
+                            <td><?php echo floor((($akhir - $total) / $akhir) * 100) ?> %</td>
                             <td>
                                 <div class="d-flex justify-content-between">
                                     Rp.

@@ -230,6 +230,7 @@
     <?php $this->load->view('anggaran/pos/modal-form-pos') ?>
     <?php $this->load->view('anggaran/anggaran/modal-anggaran') ?>
     <?php $this->load->view('anggaran/anggaran/modal-form-anggaran') ?>
+    <?php $this->load->view('anggaran/anggaran/modal-select-detail') ?>
 <?php } ?>
 <?php $this->load->view('anggaran/client/modal-klien') ?>
 <?php $this->load->view('anggaran/client/modal-form-klien') ?>

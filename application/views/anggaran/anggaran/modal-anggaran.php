@@ -1,5 +1,5 @@
 <div class="modal fade" id="modal-anggaran">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Project</h4>
@@ -27,8 +27,9 @@
                                 <td><?php echo $key + 1 ?></td>
                                 <td><?php echo $p->tahun ?></td>
                                 <td>
-                                    <a href="javascript:void(0)" onclick="openModalAnggaran(`<?php echo $p->id_anggaran ?>`)" class="btn btn-warning text-dark">Lihat Detail</a>
-                                    <a href="<?php echo site_url('project/delete_project?id-anggaran=' . $p->id_anggaran) ?>" onclick="return confirm('Hapus Data ini?')" class="btn btn-danger text-white">Hapus</a>
+                                    <a href="<?php echo site_url('anggaran/summary?tahun='. $p->tahun)?>" class="btn btn-block btn-success" target="_blank">Lihat Summary</a>
+                                    <a href="javascript:void(0)" onclick="openModalAnggaran(`<?php echo $p->tahun ?>`)" class="btn btn-block btn-warning text-dark">Edit </a>
+                                    <a href="<?php echo site_url('project/delete_project?id-anggaran=' . $p->id_anggaran) ?>" onclick="return confirm('Hapus Data ini?')" class="btn btn-block btn-danger text-white">Hapus</a>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -42,17 +43,8 @@
     </div>
 </div>
 <script>
-    var idProject = "";
-    mode = 'edit';
-    function openModalProject(idProject) {
-        this.idProject = idProject;
-        window.history.pushState('Edit', 'Edit', '?mode=edit&id-project=' + idProject);
-        var url = "<?php echo site_url('project/get_project_by_id/') ?>" + idProject;
-        $.get(url, null, function (data, status, jqXHR) {
-            $('[name="nama-project"]').val(data.nama_project);
-            $('[name="anggaran"]').val(data.anggaran);
-            $('[name="id-klien"]').val(data.id_klien);
-            $("#form-add-project").modal('show');
-        }, 'json');
+    function openModalAnggaran(tahun) {
+        $('[name="tahun"]').val(tahun);
+        $("#modal-select-detail").modal('show');
     }
 </script>

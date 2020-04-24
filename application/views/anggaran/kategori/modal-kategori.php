@@ -46,7 +46,6 @@
     mode = 'edit';
     function openModal(idKategori) {
         this.idKategori= idKategori;
-        window.history.pushState('Edit', 'Edit', '?mode=edit&id-kategori=' + idKategori);
         var url = "<?php echo site_url('kategori/get_kategori_by_id/') ?>" + idKategori;
         $.get(url, null, function (data, status, jqXHR) {
             $('[name="nama-kategori"]').val(data.nama_kategori);

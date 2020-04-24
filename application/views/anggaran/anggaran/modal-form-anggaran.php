@@ -1,5 +1,5 @@
-<div class="modal fade" id="form-add-anggaran" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+<div class="modal fade " id="form-add-anggaran" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Tambah/Edit Anggaran</h4>
@@ -74,7 +74,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group" style="height: 250px; overflow-y: auto">
+                    <div class="form-group" style="height: 200px; overflow-y: auto">
                         <label>
                             Detail Anggaran
                         </label>
@@ -97,7 +97,7 @@
                                             <input type="text" name="uraian[]" class="form-control" />
                                         </td>
                                         <td>
-                                            <input type="number" name="volume[]" class="form-control" />
+                                            <input type="number" name="volume[]" class="form-control " />
                                         </td>
                                         <td>
                                             <select class="form-control" name="satuan[]">
@@ -108,7 +108,7 @@
                                                 <option value="tahun">Tahun</option>
                                         </td>
                                         <td>
-                                            <input type="number" name="harga-satuan[]" class="form-control" />
+                                            <input type="text" name="harga-satuan[]" class="form-control currency" />
                                         </td>
 <!--                                        <td>
                                             <input type="number" name="pengeluaran[]" class="form-control" />
@@ -154,10 +154,11 @@
                     '</select>';
 
             var hrgSatuan = row.insertCell(4);
-            hrgSatuan.innerHTML = '<input type="number" name="harga-satuan[]" required class="form-control" />';
+            hrgSatuan.innerHTML = '<input type="text" name="harga-satuan[]" required class="form-control currency" />';
 //            var pengeluaran = row.insertCell(5);
 //            pengeluaran.innerHTML = '<input type="number" name="pengeluaran[]" required class="form-control" />';
         }
+        $('.currency').maskMoney({thousands: '.', precision: '0'});
     }
 
     $(".form-add-anggaran").submit(function (e) {
@@ -181,6 +182,14 @@
                 alert(textStatus);
                 console.log(JSON.stringify(jqXHR));
             }
+        });
+    });
+
+    $('[name="kategori"]').change(function () {
+        var data = $(this).val();
+        var url = "<?php echo site_url('anggaran/get_pos_by_id_kategori/') ?>" + data;
+        $.get(url, null, function (data, status, jqXHR) {
+            $('[name="pos-anggaran"]').html(data);
         });
     });
 </script>

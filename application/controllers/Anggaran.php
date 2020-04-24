@@ -70,6 +70,7 @@ class Anggaran extends CI_Controller {
         $data['klien'] = $this->client->getClientByIdPerusahaan($this->session->userdata('id_perusahaan'));
         $data['project'] = $this->project->getProjectByIdKlien();
         $data['anggaran'] = $this->anggaran->getAnggaran();
+        $data['bulan'] = $this->bulan->getBulan()->result();
         $this->load->view('headfoot/header', $data);
         $this->load->view('anggaran/home/dashboard');
         $this->load->view('headfoot/footer');
@@ -110,7 +111,7 @@ class Anggaran extends CI_Controller {
                     'uraian' => $value,
                     'volume' => $volume[$key],
                     'satuan' => $satuan[$key],
-                    'harga_satuan' => $hargaSatuan[$key],
+                    'harga_satuan' => str_replace(".", "", $hargaSatuan[$key]),
                 ];
 
                 $statusDetail = $this->crud->insertData('tbl_detail_anggaran', $dataInsertDetail);
@@ -124,6 +125,17 @@ class Anggaran extends CI_Controller {
             echo '0';
         } else {
             echo '1';
+        }
+    }
+
+    function get_pos_by_id_kategori($idKategori) {
+        $res = $this->pos->getPosByIdKategori($idKategori);
+        if ($res->num_rows() > 0) {
+            foreach ($res->result() as $key => $r) {
+                echo "<option value='$r->id_pos'>$r->nama_pos</option>";
+            }
+        }else{
+            echo "<option value=''>Belum ada data pos</option>";
         }
     }
 

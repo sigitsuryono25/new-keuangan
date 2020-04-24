@@ -40,7 +40,7 @@
             success: function (data, textStatus, jqXHR) {
                 if (data == '0') {
                     alert("Kategori Berhasil " + message + ". Silahkan Lihat pada Daftar Kategori");
-                    location.assign('anggaran');
+                    location.reload();
                 } else {
                     alert("Terjadi Kesalahan");
                 }

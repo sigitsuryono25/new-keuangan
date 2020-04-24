@@ -22,6 +22,9 @@ class Pos_m extends CI_Model {
     function getPosById($idPos) {
         return $this->db->query("SELECT * FROM tbl_pos WHERE id_pos IN ('$idPos')");
     }
-    
+
+    function getPosByIdKategori($idKategori) {
+        return $this->db->query("SELECT * FROM tbl_pos WHERE id_kategori IN ('$idKategori')");
+    }
 
 }

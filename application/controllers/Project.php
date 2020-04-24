@@ -99,9 +99,9 @@ class Project extends CI_Controller {
             $id = $lastId->row()->id_project;
             $explode = explode('-', $id);
             $nextid = $explode[1] + 1;
-            echo $prefix . str_pad($nextid, $length, "0", 0);
+            return $prefix . str_pad($nextid, $length, "0", 0);
         } else {
-            echo $prefix . str_pad('1', $length, "0", 0);
+            return $prefix . str_pad('1', $length, "0", 0);
         }
     }
 

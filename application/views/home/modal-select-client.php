@@ -29,7 +29,7 @@
                         <?php } ?>
                     </div>
                     <div class="container-fluid p-0">
-                        <span>Belum ada klien? Tambah satu <a class="text-primary" href="<?php echo site_url('client/add') ?>">disini</a></span>
+                        <span>Belum ada daftar Perusahaan? Tambah satu <a class="text-primary" href="<?php echo site_url('client/form_add_perusahaan') ?>">disini</a></span>
                     </div>
                 </div>
                 <div class="modal-footer">
