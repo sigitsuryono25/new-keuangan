@@ -128,13 +128,49 @@ class Anggaran extends CI_Controller {
         }
     }
 
+    function edit_anggaran() {
+        $idAnggaran = $this->input->post('id_anggaran');
+        $this->crud->deleteData('tbl_detail_anggaran', ['id_anggaran'=> $idAnggaran]);
+
+
+//        for tbl detail anggaran
+        $pos = $this->input->post('pos-anggaran');
+        $uraian = $this->input->post('uraian');
+        $volume = $this->input->post('volume');
+        $satuan = $this->input->post('satuan');
+        $hargaSatuan = $this->input->post('harga-satuan');
+
+        if (!empty($uraian)) {
+            foreach ($uraian as $key => $value) {
+                $dataInsertDetail = [
+                    'id_detail_anggaran' => $this->etc->gen_uuid(),
+                    'id_anggaran' => $idAnggaran,
+                    'id_pos' => $pos,
+                    'uraian' => $value,
+                    'volume' => $volume[$key],
+                    'satuan' => $satuan[$key],
+                    'harga_satuan' => str_replace(".", "", $hargaSatuan[$key]),
+                ];
+
+                $statusDetail = $this->crud->insertData('tbl_detail_anggaran', $dataInsertDetail);
+            }
+        } else {
+            echo '1';
+        }
+        if ($statusDetail > 0) {
+            echo '0';
+        } else {
+            echo '1';
+        }
+    }
+
     function get_pos_by_id_kategori($idKategori) {
         $res = $this->pos->getPosByIdKategori($idKategori);
         if ($res->num_rows() > 0) {
             foreach ($res->result() as $key => $r) {
                 echo "<option value='$r->id_pos'>$r->nama_pos</option>";
             }
-        }else{
+        } else {
             echo "<option value=''>Belum ada data pos</option>";
         }
     }

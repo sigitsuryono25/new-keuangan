@@ -24,7 +24,7 @@
                     <div class=" card-body modal-body">
                         <div class="form-group">
                             <label>Pilih Bulan</label>
-                            <select class="form-control" name="select-bulan" required>
+                            <select class="form-control" name="bulan" required>
                                 <option value=''>--Silahkan Pilih--</option>
                             </select>
                         </div>
@@ -34,15 +34,16 @@
                     </div>
                 </div>
             </form>
-            <form action="<?php echo site_url('dashboard/edit_admin') ?>" method="GET" target="_blank">
+            <form action="<?php echo site_url('detailanggaran/form_edit_perbulan') ?>" method="GET" target="_blank">
                 <div class="card mx-4 mb-4 mt-4 ">
                     <div class="card-header">
                         <h4 class='lead font-weight-bold'>Edit Detail Perbulan</h4>
                     </div>
                     <div class=" card-body modal-body">
+                        <input type="hidden" name="tahun" />
                         <div class="form-group">
                             <label>Pilih Bulan untuk diedit</label>
-                            <select class="form-control" name="select-bulan" required>
+                            <select class="form-control" name="bulan" required>
                                 <option value=''>--Silahkan Pilih--</option>
                                 <?php foreach ($bulan as $b) { ?>
                                     <option value="<?php echo $b->id_bulan ?>"><?php echo $b->nama_bulan ?></option>
@@ -50,12 +51,20 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Pilih Pos</label>
-                            <select class="form-control" name="select-pos" required>
-                                <option value=''>--Silahkan Pilih--</option>
-                                <?php foreach ($pos as $value) { ?>
-                                    <option value="<?php echo $value->id_pos ?>"><?php echo $value->nama_pos ?></option>
+                            <label for="kategori">Kategori</label>
+                            <select class="form-control kategor-edit" name="kategori" required>
+                                <option value="">--Silahkan pilih--</option>
+                                <?php
+                                foreach ($kategori as $p) {
+                                    ?>
+                                    <option value="<?php echo $p->id_kategori ?>"><?php echo $p->nama_kategori ?></option>
                                 <?php } ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="pos">Pos</label>
+                            <select class="form-control pos-anggaran-edit" name="pos">
+                                <option value="">--Silahkan pilih--</option>
                             </select>
                         </div>
                     </div>
@@ -67,3 +76,12 @@
         </div>
     </div>
 </div>
+<script>
+    $(".kategor-edit").change(function () {
+        var data = $(this).val();
+        var url = "<?php echo site_url('anggaran/get_pos_by_id_kategori/') ?>" + data;
+        $.get(url, null, function (data, status, jqXHR) {
+            $('.pos-anggaran-edit').html(data);
+        });
+    });
+</script>

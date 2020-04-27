@@ -38,8 +38,10 @@
             <h6 class="font-weight-bold text-uppercase text-dark text-center">tahun <?php echo $this->input->get('tahun') ?></h6>
             <div class="row my-4 print-container">
                 <div class="col-md-12 text-right">
-                    <button class="btn btn-outline-info" onclick="window.print()"><i class="fa fa-print"></i>&nbsp; Cetak</button>
-                    <a class="btn btn-outline-dark" href="<?php echo site_url('Detailanggaran/detail_semua_bulan?tahun='. $this->input->get('tahun'))?>" target="_blank"><i class="fa fa-print"></i>&nbsp; Cetail Detai Anggaran</a>
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-outline-primary" onclick="window.print()"><i class="fa fa-print"></i>&nbsp; Cetak</button>
+                        <a class="btn btn-outline-dark" href="<?php echo site_url('Detailanggaran/detail_semua_bulan?tahun=' . $this->input->get('tahun')) ?>" target="_blank"><i class="fa fa-print"></i>&nbsp; Cetail Detail Anggaran</a>
+                    </div>
                 </div>
             </div>
             <div class="table-responsive">
@@ -105,7 +107,7 @@
                         </tr>
                         <tr>
                             <td>Biaya Administrasi</td>
-                            <td><?php echo floor(($administrasi->total_harga_satuan / $akhir) * 100) ?> %</td>
+                            <td><?php echo round(($administrasi->total_harga_satuan / $akhir) * 100) ?> %</td>
                             <td>
                                 <div class="d-flex justify-content-between">
                                     Rp.
@@ -118,7 +120,7 @@
                         </tr>
                         <tr>
                             <td>Biaya Produksi dan Operasional</td>
-                            <td><?php echo floor(($produksi->total_harga_satuan / $akhir) * 100) ?> %</td>
+                            <td><?php echo round(($produksi->total_harga_satuan / $akhir) * 100) ?> %</td>
                             <td>
                                 <div class="d-flex justify-content-between">
                                     Rp.
@@ -131,7 +133,7 @@
                         </tr>
                         <tr>
                             <td>Biaya Hardware & Infrastruktur</td>
-                            <td><?php echo floor(($peralatan->total_harga_satuan / $akhir) * 100) ?> %</td>
+                            <td><?php echo round(($peralatan->total_harga_satuan / $akhir) * 100) ?> %</td>
                             <td>
                                 <div class="d-flex justify-content-between">
                                     Rp.
@@ -144,7 +146,7 @@
                         </tr>
                         <tr>
                             <td>Biaya Perawatan / Garansi</td>
-                            <td><?php echo floor(($perawatan->total_harga_satuan / $akhir) * 100) ?> %</td>
+                            <td><?php echo round(($perawatan->total_harga_satuan / $akhir) * 100) ?> %</td>
                             <td>
                                 <div class="d-flex justify-content-between">
                                     Rp.
@@ -161,7 +163,7 @@
                         </tr>
                         <tr style="background-color: #FFFF00">
                             <td><span class="font-weight-bold">Total Biaya Produksi yang dibutuhkan</span></td>
-                            <td><?php echo floor(($total / $akhir) * 100) ?> %</td>
+                            <td><?php echo round(($total / $akhir) * 100) ?> %</td>
                             <td>
                                 <div class="d-flex justify-content-between">
                                     Rp.
@@ -172,7 +174,7 @@
 
                         <tr style="background-color: #FFFF00">
                             <td><span class="font-weight-bold">Perkiraan Rugi Laba</span></td>
-                            <td><?php echo floor((($akhir - $total) / $akhir) * 100) ?> %</td>
+                            <td><?php echo round((($akhir - $total) / $akhir) * 100) ?> %</td>
                             <td>
                                 <div class="d-flex justify-content-between">
                                     Rp.

@@ -108,36 +108,34 @@
                                 <?php
                                 //$idBulan, $idKategori, $idPos, $idProject, $tahun) {
                                 $detail = $this->anggaran->get_detail_perbulan(
-                                        $this->input->get('bulan'),
-                                        $this->input->get('kategori'),
-                                        $this->input->get('pos'),
-                                        $this->session->userdata('id_project'),
-                                        $this->input->get('tahun')
-                                        );
-                                foreach ($detail as $key => $d) {
-                                    
-                                }
+                                                $this->input->get('bulan'), $this->input->get('kategori'), $this->input->get('pos'), $this->session->userdata('id_project'), $this->input->get('tahun')
+                                        )->result();
+                                $no = 1;
+                                echo '<input type="hidden" name="id_anggaran" value="' . $detail[0]->id_anggaran . '" class="form-control" />';
+                                foreach ($detail as $d) {
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $no++ ?></td>
+                                        <td>
+                                            <input type="text" name="uraian[]" value="<?php echo $d->uraian ?>" class="form-control" />
+                                        </td>
+                                        <td>
+                                            <input type="number" name="volume[]" value="<?php echo $d->volume ?>" class="form-control " />
+                                        </td>
+                                        <td>
+                                            <select class="form-control" name="satuan[]">
+                                                <option value="paket" <?php echo ($d->satuan =='paket') ? 'selected': ''?>>Paket</option>
+                                                <option value="personel" <?php echo ($d->satuan =='personel') ? 'selected': ''?>>Personel</option>
+                                                <option value="buku" <?php echo ($d->satuan =='buku') ? 'selected': ''?>>Buku</option>
+                                                <option value="bulan" <?php echo ($d->satuan =='bulan') ? 'selected': ''?>>Bulan</option>
+                                                <option value="tahun" <?php echo ($d->satuan =='tahun') ? 'selected': ''?>>Tahun</option>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="harga-satuan[]" value="<?php echo $d->harga_satuan ?>" class="form-control currency" />
+                                        </td>
+                                    </tr>
+                                <?php }
                                 ?>
-                                <tr>
-                                    <td>1</td>
-                                    <td>
-                                        <input type="text" name="uraian[]" class="form-control" />
-                                    </td>
-                                    <td>
-                                        <input type="number" name="volume[]" class="form-control " />
-                                    </td>
-                                    <td>
-                                        <select class="form-control" name="satuan[]">
-                                            <option value="paket">Paket</option>
-                                            <option value="personel">Personel</option>
-                                            <option value="buku">Buku</option>
-                                            <option value="bulan">Bulan</option>
-                                            <option value="tahun">Tahun</option>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="harga-satuan[]" class="form-control currency" />
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -152,7 +150,7 @@
     </form>
 </div>
 <script>
-    var urut = 1;
+    var urut = <?php echo --$no ?>;
 
     function addRows() {
         var prm = prompt("Mau tambah berapa baris ?", 1);
@@ -185,7 +183,7 @@
 
     $(".form-edit-anggaran").submit(function (e) {
         e.preventDefault();
-        var url = "<?php echo site_url('anggaran/add_anggaran_proc') ?>";
+        var url = "<?php echo site_url('anggaran/edit_anggaran') ?>";
         var data = $(this).serialize();
 
         $.ajax({url: url,
@@ -194,7 +192,7 @@
             success: function (data, textStatus, jqXHR) {
                 if (data === '0') {
                     alert(textStatus);
-                    location.assign('anggaran');
+                    location.assign('<?php echo site_url("anggaran")?>');
                 } else {
                     alert('tambah anggaran gagal');
                 }

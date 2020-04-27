@@ -78,12 +78,12 @@ class Project extends CI_Controller {
     }
 
     function delete_project() {
-        $idProject = $this->input->get('id-project');
+        $tahun = $this->input->get('tahun');
         $where = [
-            'id_project' => $idProject
+            'tahun' => $tahun
         ];
 
-        if ($this->crud->deleteData('tbl_project', $where) > 0) {
+        if ($this->crud->deleteData('tbl_anggaran', $where) > 0) {
             echo '0';
         } else {
             echo '1';

@@ -58,7 +58,7 @@
 
 <script>
     $(function () {
-        $('.currency').maskMoney({thousands: '.', precision: '0'});
+        $('.currency').maskMoney({thousands: '.', decimal: ',', precision: '0'});
     })
 </script>
 </body>

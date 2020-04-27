@@ -29,7 +29,7 @@
                                 <td>
                                     <a href="<?php echo site_url('anggaran/summary?tahun='. $p->tahun)?>" class="btn btn-block btn-success" target="_blank">Lihat Summary</a>
                                     <a href="javascript:void(0)" onclick="openModalAnggaran(`<?php echo $p->tahun ?>`)" class="btn btn-block btn-warning text-dark">Edit </a>
-                                    <a href="<?php echo site_url('project/delete_project?id-anggaran=' . $p->id_anggaran) ?>" onclick="return confirm('Hapus Data ini?')" class="btn btn-block btn-danger text-white">Hapus</a>
+                                    <a href="<?php echo site_url('project/delete_project?tahun=' . $p->tahun) ?>" onclick="return confirm('Hapus Data ini?')" class="btn btn-block btn-danger text-white">Hapus</a>
                                 </td>
                             </tr>
                         <?php } ?>
